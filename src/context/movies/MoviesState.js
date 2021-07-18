@@ -9,20 +9,26 @@ const MoviesState = (props) => {
   const initalState = {
     movies: [],
     movie: {},
-    loading: true,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(MoviesReducer, initalState);
 
+  const setLoading = () => dispatch({ type: "SET_LOADING" });
+
   // Search movies
   const searchMovies = async (movie) => {
-    const res = await axios.get(`${api}&t=${movie}`);
-    console.log(res.data);
+    setLoading();
+    try {
+      const res = await axios.get(`${api}&s=${movie}`);
 
-    dispatch({
-      type: "SEARCH_MOVIES",
-      payload: res.data,
-    });
+      dispatch({
+        type: "SEARCH_MOVIES",
+        payload: res.data.Search,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -24,13 +24,6 @@ const SearchForm = ({ handleSearch }) => {
           Search
         </button>
       </form>
-      <div className='container my-2'>
-        {search && (
-          <h2>
-            Searching for <em>{search}</em>
-          </h2>
-        )}
-      </div>
     </div>
   );
 };
