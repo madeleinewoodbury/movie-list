@@ -1,3 +1,44 @@
+.movie-title {
+  margin-bottom: 0;
+}
+
+.title-info span:first-of-type {
+  margin: 0 0.5rem 0 0;
+}
+
+.title-info span {
+  margin: 0 0.5rem;
+}
+
+.poster-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-col img {
+  width: 100%;
+}
+
+.poster-col .btn-container {
+  width: 100%;
+  display: flex;
+}
+
+.poster-col .btn-container .btn {
+  width: 50%;
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.info-col span {
+  margin: 0.1rem;
+}
+
 .card a {
   text-decoration: none;
   color: #fff;
@@ -10,5 +51,22 @@
 @media screen and (max-width: 575px) {
   .card.poster-card {
     max-width: 50%;
+  }
+  .hide-sm {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hide-md {
+    display: none;
+  }
+
+  .poster-col .btn-container {
+    flex-direction: column;
+  }
+
+  .poster-col .btn-container .btn {
+    width: 100%;
   }
 }
