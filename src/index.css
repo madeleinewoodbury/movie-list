@@ -1,3 +1,23 @@
+.watchlist-img {
+  width: 75px;
+}
+
+.watchlist-div {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.watchlist-div:hover {
+  color: #ffc107;
+  transform: scale(1.01);
+}
+
+.watchlist-div div {
+  margin-left: 1rem;
+}
+
 .movie-title {
   margin-bottom: 0;
 }
@@ -22,11 +42,10 @@
 
 .poster-col .btn-container {
   width: 100%;
-  display: flex;
 }
 
 .poster-col .btn-container .btn {
-  width: 50%;
+  width: 100%;
 }
 
 .info-col {
@@ -60,13 +79,5 @@
 @media screen and (max-width: 768px) {
   .hide-md {
     display: none;
-  }
-
-  .poster-col .btn-container {
-    flex-direction: column;
-  }
-
-  .poster-col .btn-container .btn {
-    width: 100%;
   }
 }

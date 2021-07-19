@@ -16,22 +16,17 @@ const Movie = ({ match }) => {
     getMovie(match.params.id);
   }, [match.params.id]);
 
-  const [watched, toggleWatched] = useState(false);
   const [inList, toggleInList] = useState(
     watchlist.find((item) => item.imdbID === match.params.id)
   );
 
   const handleClick = (e) => {
-    if (e.target.classList.contains("watched")) {
-      toggleWatched(!watched);
+    if (!inList) {
+      addToWatchlist(movie.imdbID);
     } else {
-      if (!inList) {
-        addToWatchlist(movie.imdbID);
-      } else {
-        removeFromWatchlist(movie.imdbID);
-      }
-      toggleInList(!inList);
+      removeFromWatchlist(movie.imdbID);
     }
+    toggleInList(!inList);
   };
 
   return (
@@ -49,28 +44,20 @@ const Movie = ({ match }) => {
               <img src={movie.Poster} alt={`${movie.Title} poster`} />
               <div className='btn-container'>
                 <button
-                  className='btn btn-primary watched'
-                  onClick={handleClick}
-                >
-                  {watched ? (
-                    <>
-                      <i className='fas fa-check'></i> Watched
-                    </>
-                  ) : (
-                    <>Not watched</>
-                  )}
-                </button>
-                <button
-                  className='btn btn-secondary in-list'
+                  className={
+                    inList
+                      ? "btn btn-danger in-list"
+                      : "btn btn-secondary in-list"
+                  }
                   onClick={handleClick}
                 >
                   {inList ? (
                     <>
-                      <i className='fas fa-list'></i> Remove
+                      <i className='fas fa-list'></i> Remove from watchlist
                     </>
                   ) : (
                     <>
-                      <i className='fas fa-list'></i> Add
+                      <i className='fas fa-list'></i> Add to watchlist
                     </>
                   )}
                 </button>
