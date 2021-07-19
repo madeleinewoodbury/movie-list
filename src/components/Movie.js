@@ -2,39 +2,25 @@ import React, { useEffect, useContext, useState } from "react";
 import MoviesContext from "../context/movies/moviesContext";
 
 const Movie = ({ match }) => {
-  // const moviesContext = useContext(MoviesContext);
-  // const { getMovie, movie, loading } = moviesContext;
+  const moviesContext = useContext(MoviesContext);
+  const { getMovie, movie, addToWatchlist, loading } = moviesContext;
 
-  // useEffect(() => {
-  //   getMovie(match.params.id);
-  // }, [match.params.id]);
+  useEffect(() => {
+    getMovie(match.params.id);
+  }, [match.params.id]);
 
-  const loading = false;
   const [watched, toggleWatched] = useState(false);
   const [inList, toggleInList] = useState(false);
 
-  const movie = {
-    Title: "Titanic",
-    Year: "1997",
-    Rated: "PG-13",
-    Released: "19 Dec 1997",
-    Runtime: "194 min",
-    Genre: "Drama, Romance",
-    Director: "James Cameron",
-    Writer: "James Cameron",
-    Actors: "Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates",
-    Plot: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
-    Language: "English, Swedish, Italian, French",
-    Country: "USA, Mexico, Australia, Canada",
-    Awards: "Won 11 Oscars. Another 115 wins & 83 nominations.",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-    Metascore: "75",
-    imdbRating: "7.8",
-    imdbID: "tt0120338",
-    BoxOffice: "$659,363,944",
-    Production:
-      "20th Century Fox, Lightstorm Entertainment, Paramount Pictures",
+  const handleClick = (e) => {
+    if (e.target.classList.contains("watched")) {
+      toggleWatched(!watched);
+    } else {
+      if (!inList) {
+        addToWatchlist(movie.imdbID);
+      }
+      toggleInList(!inList);
+    }
   };
 
   return (
@@ -52,8 +38,8 @@ const Movie = ({ match }) => {
               <img src={movie.Poster} alt={`${movie.Title} poster`} />
               <div className='btn-container'>
                 <button
-                  className='btn btn-primary'
-                  onClick={(e) => toggleWatched(!watched)}
+                  className='btn btn-primary watched'
+                  onClick={handleClick}
                 >
                   {watched ? (
                     <>
@@ -64,8 +50,8 @@ const Movie = ({ match }) => {
                   )}
                 </button>
                 <button
-                  className='btn btn-secondary'
-                  onClick={(e) => toggleInList(!inList)}
+                  className='btn btn-secondary in-list'
+                  onClick={handleClick}
                 >
                   {inList ? (
                     <>
