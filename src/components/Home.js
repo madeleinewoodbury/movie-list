@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import MoviesContext from "../context/movies/moviesContext";
 import MovieCard from "./MovieCard";
 import SearchForm from "./SearchForm";
+import Spinner from "./Spinner";
 
 const Home = () => {
   const moviesContext = useContext(MoviesContext);
@@ -13,7 +14,7 @@ const Home = () => {
   return (
     <div>
       <SearchForm handleSearch={handleSearch} />
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner />}
       <div className='container'>
         {movies.length > 0 && (
           <div className='row'>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
   return (
-    <div className='card poster-card text-white bg-dark my-2 p-0 col-md-4 col-sm-6'>
+    <div className='card poster-card text-white bg-dark my-2 p-0 col-md-3 col-sm-6'>
       <div className='card-header'>
         <Link to={`/movie/${movie.imdbID}`}>
           {movie.Title} ({movie.Year})

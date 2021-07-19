@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import MoviesContext from "../context/movies/moviesContext";
+import Spinner from "./Spinner";
 
 const Movie = ({ match }) => {
   const moviesContext = useContext(MoviesContext);
@@ -14,6 +15,7 @@ const Movie = ({ match }) => {
 
   useEffect(() => {
     getMovie(match.params.id);
+    // eslint-disable-next-line
   }, [match.params.id]);
 
   const [inList, toggleInList] = useState(
@@ -31,7 +33,7 @@ const Movie = ({ match }) => {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner />}
       {movie !== null ? (
         <>
           <h1 className='movie-title'>{movie.Title}</h1>
@@ -53,11 +55,13 @@ const Movie = ({ match }) => {
                 >
                   {inList ? (
                     <>
-                      <i className='fas fa-list'></i> Remove from watchlist
+                      <i className='fas fa-list'></i> Remove
+                      <span className='hide-sm'> from list</span>
                     </>
                   ) : (
                     <>
-                      <i className='fas fa-list'></i> Add to watchlist
+                      <i className='fas fa-list'></i> Add
+                      <span className='hide-sm'> to list</span>
                     </>
                   )}
                 </button>

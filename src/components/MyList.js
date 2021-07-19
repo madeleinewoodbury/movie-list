@@ -8,7 +8,7 @@ const MyList = () => {
   return (
     <div>
       <h1>My Watchlist</h1>
-      {watchlist.length > 0 && (
+      {watchlist.length > 0 ? (
         <div className='container'>
           {watchlist.map((movie) => (
             <Link
@@ -29,6 +29,8 @@ const MyList = () => {
             </Link>
           ))}
         </div>
+      ) : (
+        <p>You have not added any movies yet</p>
       )}
     </div>
   );
