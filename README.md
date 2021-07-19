@@ -9,3 +9,5 @@ An app that lets the user search for movies from an api and store titles in a li
 ## The API
 
 This app uses the OMDb API : [https://www.omdbapi.com/](https://www.omdbapi.com/)
+
+## [View the site](https://woodbury-movie-list.netlify.app/)
