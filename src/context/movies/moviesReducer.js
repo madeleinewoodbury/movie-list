@@ -5,7 +5,7 @@ import {
   UPDATE_WATCHLIST,
 } from "../types";
 
-export default (state, action) => {
+const moviesReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case SEARCH_MOVIES:
@@ -35,3 +35,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default moviesReducer;
