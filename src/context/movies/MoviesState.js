@@ -10,7 +10,7 @@ import {
   UPDATE_WATCHLIST,
 } from "../types";
 
-const api = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
+const api = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
 
 const MoviesState = (props) => {
   const initalState = {
