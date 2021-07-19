@@ -3,14 +3,23 @@ import MoviesContext from "../context/movies/moviesContext";
 
 const Movie = ({ match }) => {
   const moviesContext = useContext(MoviesContext);
-  const { getMovie, movie, addToWatchlist, loading } = moviesContext;
+  const {
+    getMovie,
+    movie,
+    addToWatchlist,
+    removeFromWatchlist,
+    watchlist,
+    loading,
+  } = moviesContext;
 
   useEffect(() => {
     getMovie(match.params.id);
   }, [match.params.id]);
 
   const [watched, toggleWatched] = useState(false);
-  const [inList, toggleInList] = useState(false);
+  const [inList, toggleInList] = useState(
+    watchlist.find((item) => item.imdbID === match.params.id)
+  );
 
   const handleClick = (e) => {
     if (e.target.classList.contains("watched")) {
@@ -18,6 +27,8 @@ const Movie = ({ match }) => {
     } else {
       if (!inList) {
         addToWatchlist(movie.imdbID);
+      } else {
+        removeFromWatchlist(movie.imdbID);
       }
       toggleInList(!inList);
     }

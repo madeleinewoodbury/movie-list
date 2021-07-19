@@ -2,7 +2,7 @@ import {
   SEARCH_MOVIES,
   GET_MOVIE,
   SET_LOADING,
-  ADD_TO_WATCHLIST,
+  UPDATE_WATCHLIST,
 } from "../types";
 
 export default (state, action) => {
@@ -20,7 +20,7 @@ export default (state, action) => {
         movie: payload,
         loading: false,
       };
-    case ADD_TO_WATCHLIST:
+    case UPDATE_WATCHLIST:
       return {
         ...state,
         watchlist: payload,

@@ -7,7 +7,7 @@ import {
   SEARCH_MOVIES,
   GET_MOVIE,
   SET_LOADING,
-  ADD_TO_WATCHLIST,
+  UPDATE_WATCHLIST,
 } from "../types";
 
 const api = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
@@ -30,7 +30,6 @@ const MoviesState = (props) => {
   const addToWatchlist = async (id) => {
     setLoading();
     try {
-      const my_watchlist = state.watchlist;
       const res = await axios.get(`${api}&i=${id}`);
 
       const movie = {
@@ -40,23 +39,31 @@ const MoviesState = (props) => {
         imdbID: res.data.imdbID,
       };
 
-      if (
-        my_watchlist.filter((item) => item.imdbID === movie.imdbID).length > 0
-      ) {
-        console.log("Remove from watchlist");
-      } else {
-        console.log("Add to watchlist");
-        my_watchlist.push(movie);
-        localStorage.setItem("watchlist", JSON.stringify(my_watchlist));
-      }
+      const my_watchlist = state.watchlist;
+      my_watchlist.push(movie);
+      localStorage.setItem("watchlist", JSON.stringify(my_watchlist));
 
       dispatch({
-        type: ADD_TO_WATCHLIST,
+        type: UPDATE_WATCHLIST,
         payload: my_watchlist,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Remove movie from watchlist
+  const removeFromWatchlist = (id) => {
+    setLoading();
+
+    const my_watchlist = state.watchlist.filter((movie) => movie.imdbID !== id);
+
+    localStorage.setItem("watchlist", JSON.stringify(my_watchlist));
+
+    dispatch({
+      type: UPDATE_WATCHLIST,
+      payload: my_watchlist,
+    });
   };
 
   // Search movies by movie title
@@ -99,6 +106,7 @@ const MoviesState = (props) => {
         searchMovies,
         getMovie,
         addToWatchlist,
+        removeFromWatchlist,
       }}
     >
       {props.children}
